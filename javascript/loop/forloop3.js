@@ -30,3 +30,7 @@ for (let i = 0; i < 8; i++) {
 }
 
 console.log(sum);
+
+// let temp = numAry[6]
+// numAry[6] = numAry[5];
+// numAry[5] = temp;
