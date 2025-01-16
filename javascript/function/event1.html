@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  단: <input type="number" name="dan" id="">
+  <button>구구단출력</button>
+  <div id="show"></div>
+  <script>
+    // button에 click이벤트 등록 -> 이벤트핸들러(함수) 단정보(input)를 읽어와서 구구단출력
+    document.querySelector('button').addEventListener('click', function () {
+      let inputValue = document.querySelector('input').value;
+      let html = "";
+        for (let i = 1; i <= 9; i++) {
+          html += `<p>${inputValue} * ${i} = ${inputValue * i}</p>`;
+        }
+        // html += "</p>"
+        console.log(html);
+        document.querySelector('#show').innerHTML = html;
+      });
+      // console.dir(`${i} X ${j} = ${i * j}`);
+    // let n1 = document.querySelector(i);
+    // let n2 = document.querySelector(j);
+    // for (let i = 1; i < 10; i++) {
+    //   for (let j = 1; j < 10; j++);
+    // }
+    </script>
+</body>
+
+</html>
