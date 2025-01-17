@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>exe2.html 작성</title>
+</head>
+<body>
+  이름: <input type="text" name="friend" value=""> 
+  점수: <input type="number" name="score" value=""> 
+  <button>친구추가</button>
+  <button name="remove">친구삭제</button>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>이름</th><th>점수</th>
+      </tr>
+    </thead>
+    <tbody id="list">
+    </tbody>
+  </table>
+  <script>
+    // 초기값.
+  let friendAry = [{name: '정명한', score:80},
+                   {name: '김지수', score:70},
+                   {name: '고영서', score:85},
+                   {name: '이민영', score:75},
+                   {name: '정은애', score:90}];
+                   let obj = new Object();
+                   
+    // 친구추가 이벤트 등록.
+    document.querySelector('button').addEventListener('click', function() {
+      let name1 = document.querySelector('input[name="friend"]').value; // 사용자가 입력한값(value)을 출력 
+      let score1 = document.querySelector('input[name="score"]').value; // 사자가 입력한값(value)을 출력 
+      obj.name = name1 // new Object를 만들어서 obj안에 name을 넣어줌.
+      console.log(name1)
+      obj.score = score1 // obj안에 score를 넣어줌.
+      friendAry.push(obj); // 배열에 추가 (let friendAry = [''~~~~]에다가 위의 이벤트를 추가한다(push))
+      makeList();
+      // 초기화
+      document.querySelector('input[name = "friend"]').value = ''; // 사용자가 입력하면 공백으로 돌려준다.
+      document.querySelector('input[name = "score"]').value = ''; // 사용자가 입력하면 공백으로 돌려준다.
+    });
+
+    // 삭제이벤트 등록.
+    document.querySelector('button[name = "remove"]').addEventListener('click', function() {
+      // let del = document.querySelector('input[name = "remove"]').value; ==> 내가 만든코드인데 삭제버튼만 누르는거기 때문에 input이 필요가 없다.
+      // friendAry.pop(); ---> 맨 뒤에서부터 차례대로 지우는거.
+      let searchName = document.querySelector('input[name = "friend"]').value;
+      friendAry = friendAry.filter(function(item, idx, ary) {
+        // 이름이 같으면 false, 이름이 다르면 true.
+        if(item.name == searchName) {
+          return false;
+        }
+        return true;
+      });
+      console.log(friendAry);
+      // makeList();
+      // let pos = friendAry.indexOf(searchName);
+      // friendAry.splice(pos, 1); // friendAry에 있는 목록에서 삭제하겠습니다.
+      // 찾는 이름이 없을 경우
+      if (pos == -1) {
+        alert('찾는 이름이 없습니다.');
+        return;
+      }
+      friendAry.splice(pos, 1); 
+      makeList();
+    });
+
+
+    let targetItem = document.querySelector('#list'); // tbody
+    
+    // 이름 출력.
+    function makeList() {
+      let html = '';
+      friendAry.forEach(function(item, idx, ary){
+        html += `<tr><td>${item.name}</td><td>${item.score}</td></tr>`
+      });
+      targetItem.innerHTML = html;
+    };
+    makeList(); // 실행.
+  </script>
+</body>
+</html>
