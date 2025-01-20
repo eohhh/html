@@ -46,6 +46,7 @@
       days: [1, 10, 15]
     }];
     console.log(holydays);
+
     //달력 버튼 클릭하면  월정보를 입력받아서 화면에 출력.
     // document.querySelector('button');
     document.querySelector('button').addEventListener('click', function() {
@@ -64,6 +65,12 @@
         }
         return false;
       });
+      // holy1 = [
+      //   month : 1,
+      //   days : [1, 2, 3]
+      // ]
+      
+
       console.log(holy1);
       let now = new Date(); 
       // 년도,월 지정.
@@ -94,21 +101,25 @@
       }
 
 
-
       // 날짜출력
       for (let i = 1; i <= lastDate; i++) {
-        if ((i + spaces) % 7 == 0) { //토요일
+        if(holy1.length > 0 && holy1[0].days.indexOf(i) != -1) {
+          console.log(holy1)
+          html += `<td style="background-color: pink; color: white;">${i}</td>`;
+        } else if ((i + spaces) % 7 == 0) { //토요일 
           html += `<td style="background-color: blue; color: white;">${i}</td>`;
         } else if ((i + spaces) % 7 == 1) { //일요일
           html += `<td style="background-color: red; color: white;">${i}</td>`;
         } else {
           html += `<td>${i}</td>`;
         }
+
+        
         // 토요일마다 줄바꿈
         if ((i + spaces) % 7 == 0) {
-          html += '</tr> <tr>';
+          html += '</tr><tr>';
         }
-      }
+      } // end of for.
       html += '</tr></tbody>'
       html += '</table>'
       document.querySelector('#show').innerHTML = html;
