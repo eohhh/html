@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>exe1.html 작성</title>
+</head>
+<body>
+  이름: <input type="text" name="friend" value=""> 
+  <button>친구추가</button>
+  <button name="remove">친구삭제</button>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>이름</th>
+      </tr>
+    </thead>
+    <tbody id="list">
+    </tbody>
+  </table>
+  <script>
+    // 친구추가 이벤트 등록.
+    document.querySelector('button').addEventListener('click', function() {
+      let name = document.querySelector('input[name = "friend"]').value; // 사용자가 입력한값(value)을 출력 
+      friendAry.push(name); // 배열에 추가 (let friendAry = [''~~~~]에다가 위의 이벤트를 추가한다(push))
+      makeList();
+      // 초기화
+      document.querySelector('input[name = "friend"]').value = ''; // 사용자가 입력하면 공백으로 돌려준다.
+    });
+
+    // 삭제이벤트 등록.
+    document.querySelector('button[name = "remove"]').addEventListener('click', function() {
+      // let del = document.querySelector('input[name = "remove"]').value; ==> 내가 만든코드인데 삭제버튼만 누르는거기 때문에 input이 필요가 없다.
+      // friendAry.pop(); ---> 맨 뒤에서부터 차례대로 지우는거.
+      let searchName = document.querySelector('input[name = "friend"]').value;
+      let pos = friendAry.indexOf(searchName);
+      friendAry.splice(pos, 1); // friendAry에 있는 목록에서 삭제하겠습니다.
+      // 찾는 이름이 없을 경우
+      if (pos == -1) {
+        alert('찾는 이름이 없습니다.');
+        return;
+      }
+      friendAry.splice(pos, 1); 
+      makeList();
+    });
+
+    let friendAry = ['정명한', '김지수', '고영서', '이민영', '정은애']
+    let targetItem = document.querySelector('#list'); // tbody
+    
+    // 이름 출력.
+    function makeList() {
+      let html = '';
+      friendAry.forEach(function(item, idx, ary){
+        html += `<tr><td>${item}</td></tr>`;
+      });
+      targetItem.innerHTML = html;
+    };
+    makeList(); // 실행.
+  </script>
+</body>
+</html>
